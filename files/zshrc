@@ -1,0 +1,111 @@
+#            _
+#           | |
+#    _______| |__  _ __ ___
+#   |_  / __| '_ \| '__/ __|
+#  _ / /\__ \ | | | | | (__
+# (_)___|___/_| |_|_|  \___|
+#
+
+### EXPORTS
+
+export PATH=${PATH}:$HOME/.local/bin
+export GOPATH=${HOME}/go
+export GOBIN=${GOPATH}/bin
+export PATH=${GOBIN}:${PATH}
+export LANG="en_US.UTF-8"
+export EDITOR='nvim'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+
+### SOURCES
+
+# fuzzy find
+[ -f "${HOME}/.fzf.zsh" ] && source "${HOME}/.fzf.zsh"
+
+# Google Cloud SDK
+[ -d "${HOME}/google-cloud-sdk" ] && \
+  source "${HOME}/google-cloud-sdk/path.zsh.inc" && \
+  source "${HOME}/google-cloud-sdk/completion.zsh.inc"
+
+# iTerm2 shell integration
+[ -f "${HOME}/.iterm2_shell_integration.zsh" ] && \
+  source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Work related stuff
+[ -f "${HOME}/.workrc" ] && source "${HOME}/.workrc"
+
+### OH-MY-ZSH SETTINGS
+
+ZSH_THEME="ys"
+DISABLE_AUTO_TITLE="true"
+COMPLETION_WAITING_DOTS="true"
+HIST_STAMPS="yyyy-mm-dd"
+if [[ "${VSCODE_INTEGRATED}" == "true" ]]; then
+  ZSH_TMUX_AUTOSTART=false
+else
+  ZSH_TMUX_AUTOSTART=true
+fi
+
+plugins=(git tmux fzf)
+
+# Path to your oh-my-zsh installation.
+export ZSH=${HOME}/.oh-my-zsh
+source ${ZSH}/oh-my-zsh.sh
+
+
+### ALIASES
+
+alias br="bitrise run"
+alias dcom="docker-compose"
+alias gopath="cd ${GOPATH}/src"
+alias redis-up="redis-server /usr/local/etc/redis.conf"
+alias vimconfig="nvim ~/.config/nvim/init.vim"
+alias zshconfig="vim ~/.zshrc"
+alias zshreload="source ~/.zshrc"
+alias sdnf="sudo dnf"
+alias tf="terraform"
+alias vi="nvim"
+alias vim="nvim"
+alias svim="sudo nvim"
+alias gdc="git diff --cached"
+alias wl-paste-fix='wl-paste --no-newline | tr -d "\r"'
+alias go-tdd="find $(pwd) -type f -name '*.go' | entr -c go test ./..."
+
+### FUNCTIONS
+
+paop() {
+  git push -u origin $(git symbolic-ref --short HEAD)
+  hub pull-request
+}
+
+# Xrandr scaling for the Thinkpad Carbon
+xrandr-setup() {
+xrandr --output eDP-1 --scale '1.25x1.25'
+}
+
+# Touchpad reset for the Thinkpad Carbon stuck buttons bug
+tpreset() {
+  echo "Turning trackpad off..."
+  echo -n "none" | sudo tee /sys/bus/serio/devices/serio1/drvctl
+  echo "\nTurning tackpad on again..."
+  echo -n "reconnect" | sudo tee /sys/bus/serio/devices/serio1/drvctl
+}
+
+### TOOL SETUPS
+
+# jenv
+[ -d "${HOME}/.jenv/bin" ] && \
+  export PATH="${HOME}/.jenv/bin:${PATH}" && \
+  eval "$(jenv init -)"
+
+# rbenv
+[ -d "${HOME}/.rbenv/bin" ] && \
+  export PATH="${HOME}/.rbenv/bin:${PATH}" && \
+  eval "$(rbenv init -)"
+
+# tfenv
+[ -d "${HOME}/.tfenv/bin" ] && \
+  export PATH="${HOME}/.tfenv/bin:${PATH}"
+
+eval $(hub alias -s)
+eval $(thefuck --alias)
+

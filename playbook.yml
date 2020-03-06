@@ -1,0 +1,40 @@
+---
+- hosts: all
+  connection: local
+  become_method: sudo
+  vars:
+    - ansible_sudo_pass: vagrant
+  tasks:
+    - name: Install dependency packages
+      become: yes
+      package:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - fzf
+        - neovim
+        - python3-neovim
+        - tmux
+    - name: Create neovim config dir
+      file:
+        path: "{{ ansible_env.HOME }}/.config/nvim"
+        state: directory
+        recurse: yes
+        mode: '0750'
+    - name: Copy tmux and zsh configs
+      copy:
+        src: "files/{{ item }}"
+        dest: "{{ ansible_env.HOME }}/.{{ item }}"
+        mode: '0640'
+      loop:
+        - tmux.conf
+        - zshrc
+    - name: Copy neovim configs
+      copy:
+        src: "files/{{ item }}"
+        dest: "{{ ansible_env.HOME }}/.config/nvim/{{ item }}"
+        mode: '0640'
+      loop:
+        - init.vim
+        - coc-settings.json
+...
