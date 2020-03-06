@@ -15,6 +15,7 @@
         - neovim
         - python3-neovim
         - tmux
+        - fd-find
     - name: Create neovim config dir
       file:
         path: "{{ ansible_env.HOME }}/.config/nvim"
