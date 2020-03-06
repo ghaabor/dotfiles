@@ -22,7 +22,7 @@
         state: directory
         recurse: yes
         mode: '0750'
-    - name: Copy tmux and zsh configs
+    - name: Copy config files to homedir
       copy:
         src: "files/{{ item }}"
         dest: "{{ ansible_env.HOME }}/.{{ item }}"
@@ -30,6 +30,7 @@
       loop:
         - tmux.conf
         - zshrc
+        - gitconfig
     - name: Copy neovim configs
       copy:
         src: "files/{{ item }}"

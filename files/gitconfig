@@ -1,0 +1,20 @@
+#          _ _                   __ _
+#         (_) |                 / _(_)
+#     __ _ _| |_ ___ ___  _ __ | |_ _  __ _
+#    / _` | | __/ __/ _ \| '_ \|  _| |/ _` |
+#   | (_| | | || (_| (_) | | | | | | | (_| |
+#  (_)__, |_|\__\___\___/|_| |_|_| |_|\__, |
+#     __/ |                            __/ |
+#    |___/                            |___/
+
+[alias]
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  latest-master = !git checkout master && git pull
+  lm = !git checkout master && git pull
+  co = checkout
+  cob = checkout -b
+  br = branch
+  cm = commit
+  st = status
+  commits-on-branch = !git log $(git describe --tags --abbrev=0)..HEAD --oneline
+  chlog = !git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:'%s'
