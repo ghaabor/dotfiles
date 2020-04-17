@@ -39,11 +39,6 @@ ZSH_THEME="ys"
 DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyyy-mm-dd"
-if [[ "${VSCODE_INTEGRATED}" == "true" ]]; then
-  ZSH_TMUX_AUTOSTART=false
-else
-  ZSH_TMUX_AUTOSTART=true
-fi
 
 plugins=(git tmux fzf)
 
@@ -58,8 +53,8 @@ alias br="bitrise run"
 alias dcom="docker-compose"
 alias gopath="cd ${GOPATH}/src"
 alias redis-up="redis-server /usr/local/etc/redis.conf"
-alias vimconfig="nvim ~/.config/nvim/init.vim"
-alias zshconfig="vim ~/.zshrc"
+alias vimconfig="nvim ~/dotfiles/files/init.vim"
+alias zshconfig="nvim ~/dotfiles/files/zshrc"
 alias zshreload="source ~/.zshrc"
 alias sdnf="sudo dnf"
 alias tf="terraform"
@@ -91,11 +86,6 @@ tpreset() {
 }
 
 ### TOOL SETUPS
-
-# jenv
-[ -d "${HOME}/.jenv/bin" ] && \
-  export PATH="${HOME}/.jenv/bin:${PATH}" && \
-  eval "$(jenv init -)"
 
 # rbenv
 [ -d "${HOME}/.rbenv/bin" ] && \

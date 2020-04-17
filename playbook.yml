@@ -2,41 +2,58 @@
 - hosts: all
   connection: local
   become_method: sudo
-  vars:
-    - ansible_sudo_pass: vagrant
   tasks:
     - name: Install dependency packages
       become: yes
-      package:
+      package: # works on fedora, package names are DNF specific
         name: "{{ item }}"
         state: present
       loop:
+        - zsh
         - fzf
+        - ranger
         - neovim
         - python3-neovim
         - tmux
-        - fd-find
-    - name: Create neovim config dir
+        - fd-find # replacement for find
+        - entr # inotify alternative
+        - hub # GH interactions
+        - thefuck
+        - node # required for vim coc
+        - npm # required for vim coc
+
+    - name: Create directories
       file:
-        path: "{{ ansible_env.HOME }}/.config/nvim"
+        path: "{{ item }}"
         state: directory
         recurse: yes
         mode: '0750'
-    - name: Copy config files to homedir
+      loop:
+        - "{{ ansible_env.HOME }}/.config/nvim"
+        - "{{ ansible_env.HOME }}/.local/share/nvim/site/autoload"
+        - "{{ ansible_env.HOME }}/.config/ranger"
+
+    - name: Download vim plug
+      get_url:
+        url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        dest: "{{ ansible_env.HOME }}/.local/share/nvim/site/autoload/plug.vim"
+        mode: '0640'
+
+    - name: Get tpm for tmux
+      git:
+        repo: 'https://github.com/tmux-plugins/tpm'
+        dest: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"
+
+    - name: Set up config files
       copy:
-        src: "files/{{ item }}"
-        dest: "{{ ansible_env.HOME }}/.{{ item }}"
+        src: "files/{{ item.name }}"
+        dest: "{{ ansible_env.HOME }}/{{ item.dest }}{{ item.name }}"
         mode: '0640'
       loop:
-        - tmux.conf
-        - zshrc
-        - gitconfig
-    - name: Copy neovim configs
-      copy:
-        src: "files/{{ item }}"
-        dest: "{{ ansible_env.HOME }}/.config/nvim/{{ item }}"
-        mode: '0640'
-      loop:
-        - init.vim
-        - coc-settings.json
+        - { name: 'tmux.conf', dest: '.' }
+        - { name: 'zshrc', dest: '.' }
+        - { name: 'gitconfig', dest: '.' }
+        - { name: 'init.vim', dest: '.config/nvim/' }
+        - { name: 'coc-settings.json', dest: '.config/nvim/' }
+        - { name: 'rc.conf', dest: '.config/ranger/' }
 ...
