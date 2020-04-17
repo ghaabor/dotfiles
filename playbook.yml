@@ -33,11 +33,16 @@
         - "{{ ansible_env.HOME }}/.local/share/nvim/site/autoload"
         - "{{ ansible_env.HOME }}/.config/ranger"
 
-    - name: Download vim plug
+    - name: Check if vim-plug is installed, only download it once
+      stat:
+        path: "{{ ansible_env.HOME }}/.local/share/nvim/site/autoload/plug.vim"
+      register: vim_plug
+    - name: Download vim plug if doesn't exist
       get_url:
         url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
         dest: "{{ ansible_env.HOME }}/.local/share/nvim/site/autoload/plug.vim"
         mode: '0640'
+      when: not vim_plug.stat.exists
 
     - name: Get tpm for tmux
       git:
