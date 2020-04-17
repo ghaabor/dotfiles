@@ -11,4 +11,4 @@
 4. <Ctrl-B> + <Shift-I> to install tmux plugins
 5. Launch nvim
 6. `:PlugInstall`
-7. `:CocInstall co-go`
+7. `:CocInstall coc-go`
