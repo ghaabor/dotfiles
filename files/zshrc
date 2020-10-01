@@ -105,4 +105,3 @@ fi
 
 eval $(hub alias -s)
 eval $(thefuck --alias)
-
