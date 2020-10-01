@@ -36,6 +36,8 @@ ZSH_THEME="ys"
 DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyyy-mm-dd"
+ZSH_TMUX_AUTOSTART="true"
+ZSH_TMUX_UNICODE="true"
 
 plugins=(git tmux fzf)
 
