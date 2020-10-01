@@ -19,7 +19,7 @@
         - entr # inotify alternative
         - hub # GH interactions
         - thefuck
-        - node # required for vim coc
+        - nodejs # required for vim coc
         - npm # required for vim coc
 
     - name: Create directories
