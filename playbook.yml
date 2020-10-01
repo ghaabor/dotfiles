@@ -50,6 +50,7 @@
         dest: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"
 
     - name: Set up config files
+      tags: config
       copy:
         src: "files/{{ item.name }}"
         dest: "{{ ansible_env.HOME }}/{{ item.dest }}{{ item.name }}"
