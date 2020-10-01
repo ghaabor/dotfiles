@@ -54,6 +54,7 @@ alias vimconfig="nvim ~/dotfiles/files/init.vim"
 alias zshconfig="nvim ~/dotfiles/files/zshrc"
 alias zshreload="source ~/.zshrc"
 alias sdnf="sudo dnf"
+alias sapt="sudo apt"
 alias tf="terraform"
 alias vi="nvim"
 alias vim="nvim"
@@ -61,6 +62,7 @@ alias svim="sudo nvim"
 alias gdc="git diff --cached"
 alias wl-paste-fix='wl-paste --no-newline | tr -d "\r"'
 alias go-tdd="find $(pwd) -type f -name '*.go' | entr -c go test ./..."
+alias fd="fdfind"
 
 ### FUNCTIONS
 
