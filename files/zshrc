@@ -11,7 +11,7 @@
 export PATH=${PATH}:$HOME/.local/bin
 export LANG="en_US.UTF-8"
 export EDITOR='nvim'
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_DEFAULT_COMMAND='fdfind --type f --hidden --follow --exclude .git'
 
 ### SOURCES
 
