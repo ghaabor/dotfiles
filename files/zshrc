@@ -9,9 +9,6 @@
 ### EXPORTS
 
 export PATH=${PATH}:$HOME/.local/bin
-export GOPATH=${HOME}/go
-export GOBIN=${GOPATH}/bin
-export PATH=${GOBIN}:${PATH}
 export LANG="en_US.UTF-8"
 export EDITOR='nvim'
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
@@ -95,6 +92,14 @@ tpreset() {
 # tfenv
 [ -d "${HOME}/.tfenv/bin" ] && \
   export PATH="${HOME}/.tfenv/bin:${PATH}"
+
+if [[ -d "${HOME}/.goenv" ]]; then
+  export GOENV_ROOT="$HOME/.goenv"
+  export PATH="$GOENV_ROOT/bin:$PATH"
+  eval "$(goenv init -)"
+  export PATH="$GOROOT/bin:$PATH"
+  export PATH="$PATH:$GOPATH/bin"
+fi
 
 eval $(hub alias -s)
 eval $(thefuck --alias)
