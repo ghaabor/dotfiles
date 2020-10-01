@@ -7,6 +7,10 @@
 #     __/ |                            __/ |
 #    |___/                            |___/
 
+[user]
+	name = Gabor Takacs
+	email = ghaabor@gmail.com
+
 [alias]
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   latest-master = !git checkout master && git pull
@@ -20,4 +24,7 @@
   chlog = !git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:'%s'
 
 [includeIf "gitdir:~/go/src/github.com/bitrise-io/"]
+    path = .gitconfig-work
+
+[includeIf "gitdir:~/dev/bitrise"]
     path = .gitconfig-work
