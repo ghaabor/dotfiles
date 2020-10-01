@@ -71,11 +71,6 @@ paop() {
   hub pull-request
 }
 
-# Xrandr scaling for the Thinkpad Carbon
-xrandr-setup() {
-xrandr --output eDP-1 --scale '1.25x1.25'
-}
-
 # Touchpad reset for the Thinkpad Carbon stuck buttons bug
 tpreset() {
   echo "Turning trackpad off..."
