@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=xrandr-settings
+Comment="Xrandr setup for Gnome on the 6th Gen X1 Carbon with 200% scaling. Lives under $HOME/.config/autostart/xrandr-settings.desktop"
+
+Exec=xrandr --output eDP-1 --scale 1.4x1.4
