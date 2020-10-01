@@ -39,7 +39,7 @@ HIST_STAMPS="yyyy-mm-dd"
 ZSH_TMUX_AUTOSTART="true"
 ZSH_TMUX_UNICODE="true"
 
-plugins=(git tmux fzf golang terraform ubuntu vscode)
+plugins=(git tmux fzf golang terraform ubuntu vscode zsh-interactive-cd)
 
 # Path to your oh-my-zsh installation.
 export ZSH=${HOME}/.oh-my-zsh
