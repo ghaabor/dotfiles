@@ -17,6 +17,7 @@
   lm = !git checkout master && git pull
   co = checkout
   cob = checkout -b
+  cof = !git checkout $(git branch | fzf --height=40% --reverse --info=inline)
   br = branch
   cm = commit
   st = status
