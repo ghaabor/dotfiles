@@ -23,9 +23,3 @@
   st = status
   commits-on-branch = !git log $(git describe --tags --abbrev=0)..HEAD --oneline
   chlog = !git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:'%s'
-
-[includeIf "gitdir:~/go/src/github.com/bitrise-io/"]
-    path = .gitconfig-work
-
-[includeIf "gitdir:~/dev/bitrise"]
-    path = .gitconfig-work
